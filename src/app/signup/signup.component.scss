@@ -1,0 +1,33 @@
+@use '../styles/variables' as v;
+
+.signup-container{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    width: 70vw;
+    margin:1.5rem auto; 
+    font-size: v.$font-size--medium;
+}
+
+.signup-form{
+    
+    background-color: rgba(67, 70, 99, 0.158);
+    padding: 1rem;
+    font-size: inherit;
+    
+    &>fieldset>div{
+        margin: 1rem;
+        
+        button{
+            border:1px solid black;
+            border-radius: 3px;
+            padding:3px;
+        }
+    }
+}
+
+.error-area{
+    display: flex;
+    font-size: inherit;
+    padding:1rem;
+
+}

@@ -1,0 +1,14 @@
+<form #loginForm="ngForm" class="login-form" (ngSubmit)="submit()">
+  <div class="login-form__input" >
+    <label for="codice_utente">Codice utente</label>
+    <input id="codice_utente" type="text" name="codiceUtente" [(ngModel)]="user.codiceUtente">
+  </div>
+  <div class="login-form__input" >
+    <label for="codice_utente">Password</label>
+    <input [(ngModel)]="user.password" id="codice_utente" type="text" name="password">
+  </div>
+  <div class="login-form__input" >
+    <button class="login-form__button">Accedi</button>
+  </div>
+
+</form>

@@ -1,0 +1,6 @@
+@use './app/styles/mixins' as m;
+@import 'scss-reset/_reset.scss';
+body{
+    font-size: 62.5%; 
+    @include m.app-font();
+}

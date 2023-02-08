@@ -1,0 +1,8 @@
+export interface ILoginResponse{
+idToken:string;
+expiresIn:number;
+}
+
+/* 
+{"idToken":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzUxNTI3NDEsImV4cCI6MTY3NTE2NDc0MSwic3ViIjoiMTIzNDU2Nzg5MTAifQ.DmrARJLyMklnxT64u_urtKzVRMzwC7hQdVd97h4cicGRGF6dZisGugc55IqtqwyZtQwj0HihvBrHBQ7fNruKkFmvLXZEQpvOvstPs7IHR0l74QDOVxYiAn1297T3lmePA99XrL6zj7S0vhW6DjNvwhZ-AfdlyGE7T6dM1rBY5RDMjqi5UjRPae24JragwoG3n-vjCDVq3qO0dRtIV5ou-blwnaQ47vDKlvrTB-VgGv6Oq6f-XSeWXD0r5eXULGbEZ0imzVHTzlXIcK233pbFnx6pFO98QebTMjVuFsAzQf_Lim4bMIOOwPjuvpcBTz1YGt_ETCfx8wpjI6aYhq-w-A","expiresIn":12000}
+*/

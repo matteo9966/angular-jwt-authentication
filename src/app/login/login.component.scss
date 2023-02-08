@@ -1,0 +1,54 @@
+@use '../styles/colors' as c;
+@use '../styles/variables' as v;
+.login-form{
+    display: flex;
+    flex-direction: column;
+    // width: 20rem;
+    height: v.$login-form-height;
+    position: relative;
+
+    background-color: c.$login-background--dark;
+    color:c.$login-labels--dark;
+    font-weight: bold;
+   
+
+    &__input{
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        // height: 1.9rem;
+        padding:v.$input-padding v.$input-padding;
+        font-size: v.$font-size--medium;
+        label{
+            text-transform: uppercase;
+            align-self: center;
+            font-size: v.$font-size--small;
+        }
+        input{
+            min-width: 0;
+            height: 99%;
+
+            &:focus{
+                outline: 1px solid c.$login-input-focus--dark;
+            }
+        }
+
+        &:not(:last-child){
+            border-bottom:1px solid c.$login-labels--dark;
+        }
+        &:last-child{
+            
+            border-bottom:3px solid c.$login-labels--dark;
+        }
+
+    }
+
+    &__button{
+        grid-column: 2;
+        background-color: c.$login-button;
+        border: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        color:white;
+        padding: v.$input-padding;
+    }
+}

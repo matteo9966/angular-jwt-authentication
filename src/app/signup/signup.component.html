@@ -1,0 +1,36 @@
+<div class="signup-container">
+
+  <form [formGroup]="signupForm" class="signup-form" (ngSubmit)="signUp()">
+    <fieldset>
+      <legend>temporary signup form</legend>
+      <div>
+        <label for="username_input">USERNAME</label><br />
+        <input type="text" id="username_input" formControlName="username" />
+      </div>
+      <div>
+        <label for="email_input">EMAIL</label><br />
+        <input type="text" id="email_input" formControlName="email" />
+      </div>
+      <div>
+        <label for="password_input">PASSWORD</label><br />
+        <input type="text" id="password_input" formControlName="password" />
+      </div>
+      <div>
+        <label for="password_confirm_input">CONFIRM PASSWORD</label><br />
+        <input
+          type="text"
+          id="password_confirm_input"
+          formControlName="confirmPassword"
+        />
+      </div>
+      <div class="confirm-button-area">
+        <button type="submit">Signup</button>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="error-area">
+    Qui ci posso mettere tutti gli Errori
+    <div></div>
+  </div>
+</div>

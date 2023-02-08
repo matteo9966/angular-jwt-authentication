@@ -1,0 +1,39 @@
+@use '../styles/colors' as c;
+@use '../styles/variables' as v;
+:host{
+    position: relative;
+    width: 100vw;
+}
+.navbar{
+    &__buttons{
+        // background-color: white;
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: 1px solid c.$navbar-border--light;
+        // color: c.$navbar-background-alt--light;
+        // background-color: c.$navbar-background--light;
+    }
+    &__button{
+        background-color: transparent;
+        border: none;
+        padding: 0.8rem;
+        font-size: v.$navbar-font-size;
+        text-transform: uppercase;
+        border-right: 1px solid c.$navbar-border--light;
+      
+    }
+
+    &__button--focus{
+        font-weight: bold;
+    }
+
+}
+
+.login-container{
+    width: 50%;
+    max-width: 25rem;
+    position: absolute;
+    right: 0
+    
+}
