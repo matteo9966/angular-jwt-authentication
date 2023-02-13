@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IUserLogin } from '../core/models/user/user';
+import { LoginRequest } from '../core/models/login/login.request';
 import { AuthServiceService } from '../core/services/auth-service.service';
+import { AuthenticationService } from '../core/services/authentication.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -10,28 +11,29 @@ import { AuthServiceService } from '../core/services/auth-service.service';
 })
 export class LoginComponent {
     submitted=false;
-  user: IUserLogin = { // two way binding con queste proprietà quindi posso
-    codiceUtente: null,
-    password: '',
-  };
+
+
+  loginRequest:LoginRequest = {
+    password:'',
+    email:'',
+  }
   
-  constructor(private authService:AuthServiceService,private router:Router){
+  constructor(private router:Router,private authenticationService:AuthenticationService){
 
   }
 
   submit(){
-    console.log("submitted: ",this.user);
-    
-    // if(!this.user.codiceUtente || !this.user.password){
-    //   return;
-    // } 
-    this.authService.cookie();
-    return
-    this.authService.login(+this.user.codiceUtente!,this.user.password).subscribe(result=>{
-      this.router.navigate(['/customer/home'])
-      console.log('user is logged:',this.authService.isLoggedIn())
-       if(this.authService.isLoggedIn()){
-      }
+    if(!this.loginRequest.password || !this.loginRequest.email){
+      console.log('missing password or email')
+      return
+    } 
+
+    this.authenticationService.login(this.loginRequest).subscribe(()=>{
+      this.router.navigateByUrl('/home');
     })
+
+     
+
+
   }
 }

@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, map, shareReplay, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  filter,
+  map,
+  shareReplay,
+  tap,
+} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ILoginResponse } from '../models/login.response';
 import * as moment from 'moment';
@@ -7,13 +14,14 @@ import { extractJWTPayload } from '../utils/extract-jwt-payload';
 import { API_URLS } from '../API/apiURL';
 import { IUser, IUserSignup } from '../models/user/user';
 import { environment } from 'src/environments/environment';
+import { LoginRequest } from '../models/login/login.request';
+import { LoginResponse } from '../models/login/login.response';
 
-
-const anonimous_USER:IUser ={
-  email:'',
-  username:'',
-  id:'',
-} 
+const anonimous_USER: IUser = {
+  email: '',
+  username: '',
+  id: '',
+};
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +30,7 @@ export class AuthenticationService {
   private BASE = environment.base;
   private SIGNUP_URL = `${this.BASE}${environment.signupURL}`;
   private LOGOUT_URL = `${this.BASE}${environment.logout}`;
+  private LOGIN_URL = `${this.BASE}${environment.login}`;
   private USER_URL = `${this.BASE}${environment.user}`;
   private subject = new BehaviorSubject<IUser | undefined>(anonimous_USER);
   public user$ = this.subject.pipe(filter((user) => Boolean(user)));
@@ -40,20 +49,40 @@ export class AuthenticationService {
       .pipe(
         shareReplay(),
         tap((user) => {
-          console.log(user)
+          console.log(user);
           this.subject.next(user);
         })
       );
   }
   getUserSession() {
-    return this.http.get<IUser | undefined>(this.USER_URL,{headers:{skipInterceptor:'true'}}).pipe(shareReplay());
+    return this.http
+      .get<IUser | undefined>(this.USER_URL, {
+        headers: { skipInterceptor: 'true' },
+      })
+      .pipe(shareReplay());
   }
 
-  logout(){
-    return this.http.post(this.LOGOUT_URL,null,{headers:{'skipInterceptor':'true'}}).pipe(shareReplay(),tap(
-     ()=>{
-        this.subject.next(anonimous_USER); // emetto un utente nullo
-      }
-    ))
+  logout() {
+    return this.http
+      .post(this.LOGOUT_URL, null, { headers: { skipInterceptor: 'true' } })
+      .pipe(
+        shareReplay(),
+        tap(() => {
+          this.subject.next(anonimous_USER); // emetto un utente nullo
+        })
+      );
+  }
+
+  login(loginRequest: LoginRequest) {
+    return this.http
+      .post<LoginResponse>(this.LOGIN_URL, loginRequest, {
+        headers: { skipInterceptor: 'true' },
+      })
+      .pipe(
+        shareReplay(),
+        tap((user) => {
+          this.subject.next(user);
+        })
+      );
   }
 }
