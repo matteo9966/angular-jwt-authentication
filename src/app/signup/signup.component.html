@@ -1,36 +1,41 @@
 <div class="signup-container">
 
   <form [formGroup]="signupForm" class="signup-form" (ngSubmit)="signUp()">
-    <fieldset>
-      <legend>temporary signup form</legend>
-      <div>
-        <label for="username_input">USERNAME</label><br />
+   
+      <div class="signup-control">
+        <label for="username_input">USERNAME</label>
         <input type="text" id="username_input" formControlName="username" />
+        <span class="signup-control__error">errore</span>
       </div>
-      <div>
-        <label for="email_input">EMAIL</label><br />
+      <div class="signup-control">
+        <label for="email_input">EMAIL</label>
         <input type="text" id="email_input" formControlName="email" />
+        <span class="signup-control__error">{{emailExists?'user already signed up with this email':'invalid email'}}</span>
       </div>
-      <div>
-        <label for="password_input">PASSWORD</label><br />
+      <div class="signup-control">
+        <label for="password_input">PASSWORD</label>
         <input type="text" id="password_input" formControlName="password" />
+        <span class="signup-control__error">password non valida</span>
       </div>
-      <div>
-        <label for="password_confirm_input">CONFIRM PASSWORD</label><br />
+      <div class="signup-control">
+        <label for="password_confirm_input">CONFIRM PASSWORD</label>
         <input
           type="text"
           id="password_confirm_input"
           formControlName="confirmPassword"
+          [ngClass]="showFormControlError()"
         />
+        <span class="signup-control__error">errore</span>
       </div>
       <div class="confirm-button-area">
         <button type="submit">Signup</button>
       </div>
-    </fieldset>
+   
   </form>
 
   <div class="error-area">
-    Qui ci posso mettere tutti gli Errori
-    <div></div>
+
+     <app-signup-indications [minDigits]="1" [minLength]="6" ></app-signup-indications>
+
   </div>
 </div>

@@ -3,6 +3,7 @@
 .signup-container{
     display: grid;
     grid-template-columns: 3fr 2fr;
+ 
     width: 70vw;
     margin:1.5rem auto; 
     font-size: v.$font-size--medium;
@@ -14,20 +15,52 @@
     padding: 1rem;
     font-size: inherit;
     
-    &>fieldset>div{
-        margin: 1rem;
-        
-        button{
-            border:1px solid black;
-            border-radius: 3px;
-            padding:3px;
-        }
+    button{
+        border:1px solid black;
+        border-radius: 3px;
+        padding:3px;
     }
+}
+
+.signup-control{
+    margin:1rem;
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    input{
+        display: block;
+    }
+
+    input:not(:focus).ng-dirty.ng-invalid{
+       outline:3px solid rgba(255, 0, 0, 0.274);
+    }
+
+
+
+    &__error{
+        font-size: v.$font-size--small;
+        color: red;
+        display: none;
+    }
+
+   input:not(:focus).ng-dirty.ng-invalid ~ &__error{
+        display: inline;
+    }
+}
+
+.valid-confirm-password{
+    outline:2px solid green;
 }
 
 .error-area{
     display: flex;
     font-size: inherit;
+    flex-direction: column;
+    gap: 0.5rem;
     padding:1rem;
+    border:1px solid white;
+    border-radius: 7px;
+    
+    
 
 }

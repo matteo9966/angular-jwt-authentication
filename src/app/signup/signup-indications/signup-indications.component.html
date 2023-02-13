@@ -1,0 +1,10 @@
+<div class="indications-container">
+    <span>Password</span>
+    <ul>
+        <li>🔑 Password length must be {{minLength}}</li>
+        <li>🔑 At least {{minLength}} digits</li>
+        <li *ngIf="lowercase">🔑 At least 1 lowercase</li>
+        <li *ngIf="uppercase">🔑 At least 1 uppercase</li>
+    </ul>
+</div>
+

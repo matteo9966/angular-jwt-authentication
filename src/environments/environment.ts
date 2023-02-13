@@ -4,7 +4,13 @@
 
 export const environment = {
   production: false,
-  baseUrl:'https://localhost:9000'
+  base:'/api',
+  signupURL:'/signup',
+  login:'/login',
+  user:'/user',
+  logout:'/logout',
+
+
 };
 
 /*

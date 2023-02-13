@@ -1,0 +1,9 @@
+@use '../../styles/variables' as v;
+.indications-container{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    font-size: v.$font-size--small;
+    box-shadow: 5px 5px 10px 0px #000000;
+
+}

@@ -19,9 +19,12 @@ export class AuthInterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
 
   
+
+  
     const skip = req.headers.has('skipInterceptor')
+     
     if(skip){
-      const requestClone = req.clone();
+      const requestClone = req.clone({headers:req.headers.set( 'withCredentials','true')});
       requestClone.headers.delete('skipInterceptor')
       return next.handle(requestClone)
     }

@@ -13,6 +13,7 @@ const ANONIMOUS_USER:IUser = {
   id:void 0 //undefined
 }
 
+/***@deprecated */
 @Injectable({
   providedIn: 'root'
 })
@@ -88,6 +89,11 @@ export class AuthServiceService {
       return this.http.post<IUser>(this.SIGNUP_URL,user,{headers:{skipInterceptor:"true"}}).pipe(shareReplay(),tap((user)=>{
         this.subject.next(user)
       }))
+  }
+
+
+  cookie(){
+    this.http.post('/api/cookie',{},{headers:{skipInterceptor:'true'}}).subscribe();
   }
 
 }

@@ -8,6 +8,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './core/services/Interceptors/auth-interceptor.service';
 import { SignupModule } from './signup/signup.module';
+import { HomeComponent } from './home/home.component';
+// import { FoodOverviewComponent } from './food-overview/food-overview.component';
 // import { SignupComponent } from './signup/signup.component';
 // import { CustomerHomeComponent } from './customer-home/customer-home.component';
 
@@ -15,6 +17,8 @@ import { SignupModule } from './signup/signup.module';
   declarations: [
     AppComponent,
     NavbarComponent,
+    HomeComponent,
+    // FoodOverviewComponent,
     // SignupComponent,
     // CustomerHomeComponent
   ],

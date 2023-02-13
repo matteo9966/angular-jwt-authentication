@@ -1,13 +1,43 @@
 <nav class="navbar">
-    <ul class="navbar__buttons">
-        <li>{{(isLoggedIn$|async)?'LOGGATO':'NON SEI LOGGATO'}}</li>
-        <li><button class="navbar__button">Chi siamo</button></li>
-        <li><button class="navbar__button">Sostenibilità</button></li>
-        <li><button class="navbar__button">Jobs</button></li>
-        <li><button class="navbar__button">Formazione</button></li>
-        <li><button class="navbar__button" [ngClass]="{'navbar__button--focus':showLogin}" (click)="clickAccedi()">Accedi</button></li>
-    </ul>
+  <ul class="navbar__buttons">
+    <li>{{ (isLoggedIn$ | async) ? "LOGGATO" : "NON SEI LOGGATO" }}</li>
+    <li>
+      <button
+        class="navbar__button"
+        *ngIf="isLoggedIn$ | async"
+        routerLink="/food/overview"
+      >
+        Pantry
+      </button>
+    </li>
+
+    <li><button class="navbar__button">Chi siamo</button></li>
+    <li><button class="navbar__button">Sostenibilità</button></li>
+
+    <li><button class="navbar__button">Jobs</button></li>
+    <li><button class="navbar__button">Formazione</button></li>
+    <li>
+      <button
+        class="navbar__button"
+        [ngClass]="{ 'navbar__button--focus': showLogin }"
+        (click)="clickAccedi()"
+        *ngIf="isLoggedOut$ | async"
+      >
+        Accedi
+      </button>
+    </li>
+    <li>
+      <button
+        class="navbar__button"
+        [ngClass]="{ 'navbar__button--focus': showLogin }"
+        (click)="clickLogout()"
+        *ngIf="isLoggedIn$ | async"
+      >
+        Logout
+      </button>
+    </li>
+  </ul>
 </nav>
 <div class="login-container" *ngIf="showLogin">
-    <app-login></app-login>
+  <app-login></app-login>
 </div>

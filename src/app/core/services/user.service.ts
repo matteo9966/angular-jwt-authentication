@@ -10,7 +10,6 @@ import { userExistsResponse } from '../models/user/userExists.response';
 })
 export class UserService {
   constructor(private httpClient: HttpClient) {}
-  baseUrl = environment.baseUrl;
   urls = {
     verifyEmail: `/api/signup/verify-email`,
   };

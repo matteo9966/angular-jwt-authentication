@@ -22,9 +22,11 @@ export class LoginComponent {
   submit(){
     console.log("submitted: ",this.user);
     
-    if(!this.user.codiceUtente || !this.user.password){
-      return;
-    } 
+    // if(!this.user.codiceUtente || !this.user.password){
+    //   return;
+    // } 
+    this.authService.cookie();
+    return
     this.authService.login(+this.user.codiceUtente!,this.user.password).subscribe(result=>{
       this.router.navigate(['/customer/home'])
       console.log('user is logged:',this.authService.isLoggedIn())

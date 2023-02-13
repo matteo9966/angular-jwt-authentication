@@ -10,8 +10,8 @@ passwordSchema.is().min(6)
               .has().not().spaces()
               .is().not().oneOf(['Passw0rd','Passwrord123','Qwerty123'])
 
- function validatePassword(password:string){
-    return passwordSchema.validate(password,{list:true,details:true})
+ export function validatePassword(password:string){
+    return passwordSchema.validate(password,{list:true,details:true}) as any[]
 }
 
 
