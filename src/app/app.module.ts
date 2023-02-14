@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { LoginModule } from './login/login.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './core/services/Interceptors/auth-interceptor.service';
 import { SignupModule } from './signup/signup.module';
 import { HomeComponent } from './home/home.component';
@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
+
     // FoodOverviewComponent,
     // SignupComponent,
     // CustomerHomeComponent
@@ -27,7 +28,11 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     LoginModule,
     SignupModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({ //TODO non aggiunge questo header per qualche motivo :(
+      cookieName:'XSRF-TOKEN',
+      headerName:'x-XSRF-TOKEN'
+    })
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,multi:true,useClass:AuthInterceptorService
