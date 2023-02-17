@@ -16,6 +16,7 @@ import { IUser, IUserSignup } from '../models/user/user';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/login/login.request';
 import { LoginResponse } from '../models/login/login.response';
+import { getAllUsersResponse } from '../models/getAllUsers/getAllUsers.response';
 
 const anonimous_USER: IUser = {
   email: '',
@@ -32,6 +33,8 @@ export class AuthenticationService {
   private LOGOUT_URL = `${this.BASE}${environment.logout}`;
   private LOGIN_URL = `${this.BASE}${environment.login}`;
   private USER_URL = `${this.BASE}${environment.user}`;
+
+  private ADMIN_AS_USER_URL = `${this.BASE}${environment.admin}${environment.admin}`;
   private subject = new BehaviorSubject<IUser | undefined>(anonimous_USER);
   public user$ = this.subject.pipe(filter((user) => Boolean(user)));
   public isLoggedIn$ = this.user$.pipe(map((user) => Boolean(user?.id)));
@@ -85,4 +88,16 @@ export class AuthenticationService {
         })
       );
   }
+
+  loginAsUser(userEmail: string) {
+    return this.http.post<LoginResponse>(
+      this.ADMIN_AS_USER_URL,
+      { email: userEmail },
+      {
+        headers: { skipInterceptor: 'true' },
+      }
+    );
+  }
+
+
 }

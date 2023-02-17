@@ -1,0 +1,18 @@
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th *ngFor="let head of tableHeaders">{{head}}</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let userData of displayUsers">
+            <td *ngFor="let data of userData">{{data}}</td>
+        </tr>
+    
+        <!-- and so on... -->
+    </tbody>
+</table>
+<div class="pages-buttons">
+    <button class="pages-buttons__button" *ngFor="let page of pages" (click)="onClickPage(page)">{{page}}</button>
+</div>

@@ -1,28 +1,42 @@
-import {Component} from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+
+import { Observable, takeUntil, takeWhile } from 'rxjs';
 import { AuthServiceService } from '../core/services/auth-service.service';
 import { AuthenticationService } from '../core/services/authentication.service';
+import { ViewService } from '../core/services/view.service';
 
-@Component(
-    {
-        templateUrl:'./navbar.component.html',
-        styleUrls:['./navbar.component.scss'],
-        selector:'app-navbar'
-    }
-)
-export  class NavbarComponent {
-   showLogin=false; 
-   isLoggedIn$!:Observable<boolean>
-   isLoggedOut$!:Observable<boolean>
-   constructor(private authService:AuthenticationService){
-      this.isLoggedIn$ = this.authService.isLoggedIn$;
-      this.isLoggedOut$ = this.authService.isLoggedOut$;
-   }
-   clickAccedi(){
-    this.showLogin = !this.showLogin
-   }
+@Component({
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss'],
+  selector: 'app-navbar',
+})
+export class NavbarComponent implements OnDestroy {
+  showLogin = false;
+  showLogin$: Observable<boolean>;
+  isLoggedIn$!: Observable<boolean>;
+  isLoggedOut$!: Observable<boolean>;
+  stillAlive = true;
+  
+  constructor(
+    private authService: AuthenticationService,
+    private viewService: ViewService
+  ) {
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+    this.isLoggedOut$ = this.authService.isLoggedOut$;
+    this.showLogin$ = this.viewService.showLogin$;
+    // this.showLogin$
+    //   .pipe(takeWhile(() => this.stillAlive))
+    //   .subscribe((show) => (this.showLogin = show));
+  }
+  ngOnDestroy(): void {
+    this.stillAlive = false;
+  }
 
-   clickLogout(){
+  clickAccedi() {
+    this.viewService.changeShowLogin(true);
+  }
+
+  clickLogout() {
     this.authService.logout().subscribe();
-   }
+  }
 }

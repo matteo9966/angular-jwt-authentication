@@ -11,11 +11,9 @@
       </button>
     </li>
 
-    <li><button class="navbar__button">Chi siamo</button></li>
-    <li><button class="navbar__button">Sostenibilità</button></li>
 
-    <li><button class="navbar__button">Jobs</button></li>
-    <li><button class="navbar__button">Formazione</button></li>
+    <li><button class="navbar__button">ADMIN</button></li>
+    <li><button class="navbar__button">USER</button></li>
     <li>
       <button
         class="navbar__button"
@@ -38,6 +36,6 @@
     </li>
   </ul>
 </nav>
-<div class="login-container" *ngIf="showLogin">
+<div class="login-container" *ngIf="showLogin$|async">
   <app-login></app-login>
 </div>

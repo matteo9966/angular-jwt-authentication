@@ -9,6 +9,10 @@ export const environment = {
   login:'/login',
   user:'/user',
   logout:'/logout',
+  admin:'/admin',
+  loginAsUser:'/as-user',
+  getAllUsers:'/admin/users',
+  verifyEmail:'signup/verify-email',
 
 
 };

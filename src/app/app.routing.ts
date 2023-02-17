@@ -13,16 +13,21 @@ const routes: Routes = [
       import('./customer/customer.module').then((m) => m.CustomerModule),
   },
   {
-    path:'home',
-    component:HomeComponent
+    path: 'home',
+    component: HomeComponent,
   },
   {
-   path:'food',
-   loadChildren:()=>import('./food/food.module').then(m=>m.FoodModule)
+    path: 'food',
+    loadChildren: () => import('./food/food.module').then((m) => m.FoodModule),
   },
   {
     path: 'signup',
-    component:SignupComponent
+    component: SignupComponent,
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin-home/admin.module').then((m) => m.AdminModule),
   },
   { path: '', redirectTo: 'signup', pathMatch: 'full' },
 

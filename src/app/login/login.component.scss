@@ -21,10 +21,10 @@
         label{
             text-transform: uppercase;
             align-self: center;
-            font-size: v.$font-size--small;
+            font-size: v.$font-size--medium;
         }
         input{
-            min-width: 0;
+            min-width: 35ch;
             height: 99%;
 
             &:focus{

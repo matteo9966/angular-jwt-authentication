@@ -9,6 +9,8 @@ import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angu
 import { AuthInterceptorService } from './core/services/Interceptors/auth-interceptor.service';
 import { SignupModule } from './signup/signup.module';
 import { HomeComponent } from './home/home.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { GetAllUsersResolverService } from './core/guards/resolvers/get-all-users-resolver.service';
 // import { FoodOverviewComponent } from './food-overview/food-overview.component';
 // import { SignupComponent } from './signup/signup.component';
 // import { CustomerHomeComponent } from './customer-home/customer-home.component';
@@ -18,6 +20,7 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
+
 
     // FoodOverviewComponent,
     // SignupComponent,
@@ -35,7 +38,8 @@ import { HomeComponent } from './home/home.component';
     })
   ],
   providers: [{
-    provide:HTTP_INTERCEPTORS,multi:true,useClass:AuthInterceptorService
+    provide:HTTP_INTERCEPTORS,multi:true,useClass:AuthInterceptorService,
+   
   }],
   bootstrap: [AppComponent]
 })

@@ -17,7 +17,7 @@
     &__button{
         background-color: transparent;
         border: none;
-        padding: 0.8rem;
+        padding: 1rem;
         font-size: v.$navbar-font-size;
         text-transform: uppercase;
         border-right: 1px solid c.$navbar-border--light;
@@ -32,7 +32,7 @@
 
 .login-container{
     width: 50%;
-    max-width: 25rem;
+    max-width: 45rem;
     position: absolute;
     right: 0
     
