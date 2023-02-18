@@ -7,16 +7,12 @@ import {
   shareReplay,
   tap,
 } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ILoginResponse } from '../models/login.response';
-import * as moment from 'moment';
-import { extractJWTPayload } from '../utils/extract-jwt-payload';
-import { API_URLS } from '../API/apiURL';
+import { HttpClient } from '@angular/common/http';
+
 import { IUser, IUserSignup } from '../models/user/user';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/login/login.request';
 import { LoginResponse } from '../models/login/login.response';
-import { getAllUsersResponse } from '../models/getAllUsers/getAllUsers.response';
 
 const anonimous_USER: IUser = {
   email: '',
@@ -34,7 +30,7 @@ export class AuthenticationService {
   private LOGIN_URL = `${this.BASE}${environment.login}`;
   private USER_URL = `${this.BASE}${environment.user}`;
 
-  private ADMIN_AS_USER_URL = `${this.BASE}${environment.admin}${environment.admin}`;
+  private ADMIN_AS_USER_URL = `${this.BASE}${environment.admin}${environment.loginAsUser}`;
   private subject = new BehaviorSubject<IUser | undefined>(anonimous_USER);
   public user$ = this.subject.pipe(filter((user) => Boolean(user)));
   public isLoggedIn$ = this.user$.pipe(map((user) => Boolean(user?.id)));
@@ -96,7 +92,9 @@ export class AuthenticationService {
       {
         headers: { skipInterceptor: 'true' },
       }
-    );
+    ).pipe(shareReplay(),tap(user=>{
+      this.subject.next(user);
+    }))
   }
 
 

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { GetAllUsersResolverService } from '../core/guards/resolvers/get-all-users-resolver.service';
 import { AdminHomeComponent } from './admin-home.component';
@@ -8,6 +9,7 @@ import { UsersTableComponent } from './users-table/users-table.component';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild([
       {
         path: '',

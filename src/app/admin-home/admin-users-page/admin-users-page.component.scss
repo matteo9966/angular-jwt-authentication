@@ -1,0 +1,23 @@
+.table-container{
+    min-height: 30vh;
+}
+
+.login-form-title{
+    margin: 3rem 0;
+}
+
+.login-asuser-form{
+    display: flex;
+    margin-top: 3rem;
+
+    button{
+        padding: 1rem;
+        background-color: rgb(0, 128, 90);
+        margin-left: 3rem;;
+        color:white;
+        &:disabled{
+            background-color:gray;
+        }
+    }
+}
+

@@ -1,9 +1,5 @@
 import { UserRoles } from "../../constants/userRoles";
 
-export interface IUserLogin {
-    codiceUtente:number|null;
-    password:string;
-}
 
 export interface IUser {
   username:string;

@@ -1,2 +1,11 @@
 <p>Admin users page</p>
-<app-users-table [users]="users"></app-users-table>
+<div class="table-container">
+    <app-users-table [users]="users"></app-users-table>
+</div>
+<p class="login-form-title">Login as User</p>
+<div class="login-asuser-form">
+    <form #asUserForm="ngForm"  (ngSubmit)="onSubmit()">
+        <input type="text" placeholder="user-email" [(ngModel)]="inputEmail" required email name="email">
+        <button type="submit" [disabled]="!asUserForm.valid">Submit</button>
+    </form>
+</div>

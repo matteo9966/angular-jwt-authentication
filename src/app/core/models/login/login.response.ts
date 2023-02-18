@@ -1,3 +1,5 @@
 import { IUser } from "../user/user";
-
-export interface LoginResponse extends IUser{}
+import {UserRoles} from '../../constants/userRoles';
+export interface LoginResponse extends IUser{
+    roles:(keyof typeof UserRoles)[]
+}
