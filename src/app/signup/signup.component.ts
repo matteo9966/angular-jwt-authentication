@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { IUserSignup } from '../core/models/user/user';
-import { AuthServiceService } from '../core/services/auth-service.service';
 import { AuthenticationService } from '../core/services/authentication.service';
 import { UserService } from '../core/services/user.service';
 import { confirmPasswordValidator } from '../core/validators/confirm-password.validator';

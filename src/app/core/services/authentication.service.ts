@@ -18,6 +18,7 @@ const anonimous_USER: IUser = {
   email: '',
   username: '',
   id: '',
+  roles:[]
 };
 
 @Injectable({

@@ -1,7 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-
-import { Observable, takeUntil, takeWhile } from 'rxjs';
-import { AuthServiceService } from '../core/services/auth-service.service';
+import { Observable} from 'rxjs';
 import { AuthenticationService } from '../core/services/authentication.service';
 import { ViewService } from '../core/services/view.service';
 

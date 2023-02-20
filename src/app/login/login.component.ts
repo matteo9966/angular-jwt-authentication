@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../core/models/login/login.request';
-import { AuthServiceService } from '../core/services/auth-service.service';
 import { AuthenticationService } from '../core/services/authentication.service';
 import { ViewService } from '../core/services/view.service';
 
