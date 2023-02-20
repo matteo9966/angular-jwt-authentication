@@ -1,6 +1,14 @@
 <nav class="navbar">
   <ul class="navbar__buttons">
-    <li>{{ (isLoggedIn$ | async) ? "LOGGATO" : "NON SEI LOGGATO" }}</li>
+    <li
+      class="navbar__button"
+      [ngClass]="{
+        'status--online': (isLoggedIn$ | async),
+        'status--offline': !(isLoggedIn$ | async)
+      }"
+    >
+      {{ (isLoggedIn$ | async) ? "LOGGED IN" : "NOT LOGGED IN" }}
+    </li>
     <li>
       <button
         class="navbar__button"
@@ -11,10 +19,17 @@
       </button>
     </li>
 
-
-    <li *appRbacAllow="['ADMIN']"><button class="navbar__button" >ADMIN</button></li>
-    <li  *appRbacAllow="['ADMIN','USER']"><button class="navbar__button">USER</button></li>
-    <li *appRbacAllow="['ADMIN']"><button class="navbar__button" [routerLink]="'/admin/users'" >ADMIN USERS</button></li>
+    <li *appRbacAllow="['ADMIN']">
+      <button class="navbar__button">ADMIN</button>
+    </li>
+    <li *appRbacAllow="['ADMIN', 'USER']">
+      <button class="navbar__button">USER</button>
+    </li>
+    <li *appRbacAllow="['ADMIN']">
+      <button class="navbar__button" [routerLink]="'/admin/users'">
+        ADMIN USERS
+      </button>
+    </li>
 
     <li>
       <button
@@ -23,9 +38,20 @@
         (click)="clickAccedi()"
         *ngIf="isLoggedOut$ | async"
       >
-        Accedi
+        Login
       </button>
     </li>
+    <li>
+      <button
+        class="navbar__button"
+        [ngClass]="{ 'navbar__button--focus': showLogin }"
+        [routerLink]="'/signup'"
+        *ngIf="isLoggedOut$ | async"
+      >
+        Sign up
+      </button>
+    </li>
+
     <li>
       <button
         class="navbar__button"
@@ -38,6 +64,6 @@
     </li>
   </ul>
 </nav>
-<div class="login-container" *ngIf="showLogin$|async">
+<div class="login-container" *ngIf="showLogin$ | async">
   <app-login></app-login>
 </div>

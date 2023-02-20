@@ -11,6 +11,7 @@ import { SignupModule } from './signup/signup.module';
 import { HomeComponent } from './home/home.component';
 ;
 import { RbacAllowDirective } from './core/directives/rbacAllow.directive';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { RbacAllowDirective } from './core/directives/rbacAllow.directive';
     NavbarComponent,
     HomeComponent,
     RbacAllowDirective,
+    UnauthorizedComponent,
 
   ],
   imports: [
@@ -34,7 +36,6 @@ import { RbacAllowDirective } from './core/directives/rbacAllow.directive';
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,multi:true,useClass:AuthInterceptorService,
-   
   }],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,30 @@
+<h3>User home</h3>
+<ng-container *ngIf="user" >
+  <div class="user-container">
+     <table class="styled-table">
+        <thead>
+            <tr>
+              <th>USERNAME</th>
+              <th>EMAIL</th>
+              <th>ID</th>
+              <th>Roles</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+              <td>{{username}}</td>
+              <td>{{email}}</td>
+              <td>{{id}}</td>
+          </tr>
+          <tr  *ngFor="let role of roles">
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>{{role}}</td>
+          </tr>
+        </tbody>
+     </table>
+  </div>
+
+</ng-container>

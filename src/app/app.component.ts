@@ -17,7 +17,7 @@ export class AppComponent {
       }
   })
 
-  router.navigateByUrl('/admin/users')
+  // router.navigateByUrl('/admin/users')
 }
 
 hideLogin(){

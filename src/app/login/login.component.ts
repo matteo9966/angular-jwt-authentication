@@ -27,7 +27,7 @@ export class LoginComponent {
   // @HostListener('click', ['$event'])
   // clickout(event: Event) {
   //   if (!this.eRef.nativeElement.contains(event.target)) {
-        
+
   //     this.viewService.changeShowLogin(false); //se sono fuori nascondi, se sto già nascondendo non fare nulla
   //   }else{
   //     this.viewService.changeShowLogin(true);
@@ -40,9 +40,16 @@ export class LoginComponent {
       return;
     }
 
-    this.authenticationService.login(this.loginRequest).subscribe(() => {
-      this.router.navigateByUrl('/home');
-      this.viewService.changeShowLogin(false)
-    });
+    this.authenticationService
+      .login(this.loginRequest)
+      .subscribe((response) => {
+        this.viewService.changeShowLogin(false);
+        if (response.roles.includes('ADMIN')) {
+          this.router.navigateByUrl('/admin');
+        } else {
+          this.router.navigateByUrl('/user');
+        }
+        return;
+      });
   }
 }

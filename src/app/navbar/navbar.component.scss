@@ -37,3 +37,14 @@
     right: 0
     
 }
+
+.status{
+    &--offline{
+        color:red;
+        background-color: rgba(255, 0, 0, 0.068);
+    }
+    &--online{
+        color:rgb(0, 255, 0);
+        background-color: rgba(0, 255, 85, 0.048);
+    }
+}
