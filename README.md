@@ -10,7 +10,8 @@ This project goes along with the nodejs Server:
 To run the project:
 
 - run command 
-` "start:dev": "tsnd --respawn --debug --files server.ts --watch **/*.ts"`
+ `npm run start:dev` ( check the package.json` "start:dev": "tsnd --respawn --debug --files server.ts --watch **/*.ts"`)
+
 
 this will initialize a https development server with self signed certificates,
 
