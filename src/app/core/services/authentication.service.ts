@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   catchError,
+  EMPTY,
   filter,
   map,
   shareReplay,
@@ -18,7 +19,7 @@ const anonimous_USER: IUser = {
   email: '',
   username: '',
   id: '',
-  roles:[]
+  roles: [],
 };
 
 @Injectable({
@@ -30,6 +31,7 @@ export class AuthenticationService {
   private LOGOUT_URL = `${this.BASE}${environment.logout}`;
   private LOGIN_URL = `${this.BASE}${environment.login}`;
   private USER_URL = `${this.BASE}${environment.user}`;
+  private REFRESH_URL = `${this.BASE}${environment.refresh}`;
 
   private ADMIN_AS_USER_URL = `${this.BASE}${environment.admin}${environment.loginAsUser}`;
   private subject = new BehaviorSubject<IUser | undefined>(anonimous_USER);
@@ -44,7 +46,7 @@ export class AuthenticationService {
   signup(user: IUserSignup) {
     return this.http
       .post<IUser>(this.SIGNUP_URL, user, {
-        headers: { skipInterceptor: 'true' },
+        headers: { skip: 'true' },
       })
       .pipe(
         shareReplay(),
@@ -57,14 +59,14 @@ export class AuthenticationService {
   getUserSession() {
     return this.http
       .get<IUser | undefined>(this.USER_URL, {
-        headers: { skipInterceptor: 'true' },
+        headers: { skip: 'true' },
       })
       .pipe(shareReplay());
   }
 
   logout() {
     return this.http
-      .post(this.LOGOUT_URL, null, { headers: { skipInterceptor: 'true' } })
+      .post(this.LOGOUT_URL, null, { headers: { skip: 'true' } })
       .pipe(
         shareReplay(),
         tap(() => {
@@ -76,7 +78,7 @@ export class AuthenticationService {
   login(loginRequest: LoginRequest) {
     return this.http
       .post<LoginResponse>(this.LOGIN_URL, loginRequest, {
-        headers: { skipInterceptor: 'true' },
+        headers: { skip: 'true' },
       })
       .pipe(
         shareReplay(),
@@ -87,16 +89,34 @@ export class AuthenticationService {
   }
 
   loginAsUser(userEmail: string) {
-    return this.http.post<LoginResponse>(
-      this.ADMIN_AS_USER_URL,
-      { email: userEmail },
-      {
-        headers: { skipInterceptor: 'true' },
-      }
-    ).pipe(shareReplay(),tap(user=>{
-      this.subject.next(user);
-    }))
+    return this.http
+      .post<LoginResponse>(
+        this.ADMIN_AS_USER_URL,
+        { email: userEmail },
+        {
+          headers: { skip: 'true' },
+        }
+      )
+      .pipe(
+        shareReplay(),
+        tap((user) => {
+          this.subject.next(user);
+        })
+      );
   }
 
-
+  refresh() {
+    const email = this.subject.value?.email;
+    return this.http.post(this.REFRESH_URL, { email: email || '' }).pipe(
+      tap({
+        error: (err) => {
+          console.log(err);
+        },
+      }),
+      shareReplay(),
+      catchError(() => {
+        return EMPTY; // non voglio che fa nulla se c'è un errore
+      })
+    );
+  }
 }

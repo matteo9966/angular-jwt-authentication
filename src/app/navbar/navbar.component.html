@@ -62,6 +62,15 @@
         Logout
       </button>
     </li>
+    <li>
+      <button
+        class="navbar__button"
+        (click)="whoami()"
+        *ngIf="isLoggedIn$ | async"
+      >
+        WHOAMI
+      </button>
+    </li>
   </ul>
 </nav>
 <div class="login-container" *ngIf="showLogin$ | async">

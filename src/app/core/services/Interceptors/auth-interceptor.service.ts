@@ -4,67 +4,46 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, EMPTY, Observable, throwError } from 'rxjs';
+import { Injectable, Injector } from '@angular/core';
+import { catchError, EMPTY, Observable, switchMap, throwError } from 'rxjs';
+import { AuthenticationService } from '../authentication.service';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor() {}
+  constructor(private injector: Injector) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    //this request should handle request if token is expired:
+    //use a flag like "retry" if i should retry
 
-  
+    const reqClone = req.clone({ headers: req.headers.delete('skip', 'true') });
 
-  
-    // const skip = req.headers.has('skipInterceptor')
-     
-    // if(skip){
-    //   const requestClone = req.clone({headers:req.headers.set( 'withCredentials','true')});
-    //   requestClone.headers.delete('skipInterceptor')
-    //   return next.handle(requestClone)
-    // }
-
-    // const idToken = localStorage.getItem('id_token');
-
-    // //FIXME: ho cambiato la logica vedi SKIPINTERCEPTOR
-    // //posso intercettare anche in base all'url
-    // if(!req.url.toLowerCase().includes('login')){
-    //   //tutte le richieste oltre a quelle di login devono avere l'utente autenticato
-
-    // }
-
-    // if (!idToken) {
-    //   return next.handle(req);
-    // }
-
-    // const cloned = req.clone({
-    //   headers: req.headers.set('Authorization', `Bearer ${idToken}`),//anche headers è immutabile 
-    // });
-  
-
-    // return next.handle(cloned).pipe(
-    //   catchError(err=>{
-        
-    //     //todo : se il token è scaduto fai il refresh del token
-    //     if(!"todo: token ancora valido e non scaduto"){
-    //        this.handleRefreshToken(req,next);
-    //     }
-
-    //     return throwError(err);
-    //   })
-    // );
-    return next.handle(req);
+    return next.handle(reqClone).pipe(
+      catchError((err) => {
+        if (err.status === 401) {
+          return this.handleRefreshToken(req, next);
+        }
+        return EMPTY;
+      })
+    );
   }
 
-  // handleRefreshToken(    
-  //   req: HttpRequest<any>,
-  //   next: HttpHandler){
-     
-  // }
+  handleRefreshToken(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const authService = this.injector.get(AuthenticationService); // approfondisci sta cosa
+    return authService.refresh().pipe(
+      switchMap((resp) => {
+        return next.handle(req); // ripeto la richiesta con il sessiontoken fresco
+      })
+    );
+  }
 }
 
 //1JWKS  endpoint ?? OBBIETTIVO AVERE UN JWKS entro pomeriggio e sviluppare un mbac

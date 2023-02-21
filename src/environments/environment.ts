@@ -13,6 +13,8 @@ export const environment = {
   loginAsUser:'/as-user',
   getAllUsers:'/admin/users',
   verifyEmail:'signup/verify-email',
+  refresh:'/refresh',
+  whoami:'/whoami'
 
 
 };

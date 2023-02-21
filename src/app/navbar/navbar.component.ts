@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthenticationService } from '../core/services/authentication.service';
+import { UserService } from '../core/services/user.service';
 import { ViewService } from '../core/services/view.service';
 
 @Component({
@@ -14,10 +15,11 @@ export class NavbarComponent implements OnDestroy {
   isLoggedIn$!: Observable<boolean>;
   isLoggedOut$!: Observable<boolean>;
   stillAlive = true;
-  
+
   constructor(
     private authService: AuthenticationService,
-    private viewService: ViewService
+    private viewService: ViewService,
+    private userService: UserService
   ) {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
     this.isLoggedOut$ = this.authService.isLoggedOut$;
@@ -36,5 +38,11 @@ export class NavbarComponent implements OnDestroy {
 
   clickLogout() {
     this.authService.logout().subscribe();
+  }
+
+  whoami() {
+    this.userService.whoami().subscribe((user) => {
+      alert(JSON.stringify(user || ''));
+    });
   }
 }
