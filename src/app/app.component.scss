@@ -1,3 +1,15 @@
-.router-container{
- min-height: 100vh;
+@use './styles/variables' as v;
+
+:host{
+  overflow: hidden;
 }
+.container{
+  background-image: v.$app-bg;
+  background-size: cover;
+}
+.router-container {
+  min-height: 100vh;
+  position: relative;
+  margin-top: v.$navbar-height;
+}
+

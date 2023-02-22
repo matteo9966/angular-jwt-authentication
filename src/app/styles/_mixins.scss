@@ -1,4 +1,67 @@
+@use 'sass:map';
 @mixin app-font {
     font-family: "Comfortaa", cursive;
     font-family: "Lato", sans-serif;
   }
+
+  @mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+$breakpoints: (
+  phone: phone,
+  tab-port: tab-port,
+  tab-land: tab-land,
+  desktop:desktop,
+  big-desktop: big-desktop,
+);
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    } //900px
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+  @if $breakpoint == desktop {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } //1380px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } //1800
+  }
+}
+
+@mixin respond-desktop{
+    @include respond(map.get($breakpoints,"desktop")){
+        @content;
+    }
+}
+@mixin respond-tab-port{
+    @include respond(map.get($breakpoints,"tab-port")){
+        @content;
+    }
+}
+
+
+@mixin respond-phone{
+    @include respond(map.get($breakpoints,"phone")){
+        @content;
+    }
+}

@@ -1,0 +1,58 @@
+@use '../../styles/colors' as c;
+@use 'sass:color';
+.footer-container{
+    width: 100%;
+    padding:5rem;
+    background-color: transparentize($color:c.$color-secondary, $amount: 0.5);
+    color: c.$color-secondary-alt;
+    
+}
+
+.info-container{
+    gap: 15rem;
+    width: 100%;
+    justify-content: stretch;
+    display: flex;
+
+}
+
+.logo-container{
+  width: 100%;
+  .logo{
+    width: 5vw;
+    height: 5vw;
+    margin: auto;
+    display: block;
+    transition: all 0.2s;
+  }
+  .logo:hover{
+    transform: scale(1.2);
+  }
+}
+
+.footer-block{
+   flex:1;
+   border-top:1px solid c.$color-secondary-alt;;
+   padding-top:2rem;
+}
+
+.footer-navigation{
+    // &__links{
+         
+    // }
+
+    &__link{
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:not(:last-child){
+        margin-right: 1rem;
+      }
+
+      &:hover{
+        transform: scale(1.1);
+      }
+    }
+}
+

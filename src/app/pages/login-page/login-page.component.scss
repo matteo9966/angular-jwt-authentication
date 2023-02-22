@@ -1,0 +1,18 @@
+@use '../../styles/mixins' as m;
+
+.login-container {
+    width: 90vw;
+    overflow: auto;
+    padding: 6rem;
+    margin:auto;
+    position:relative;
+    
+    
+    @include m.respond-tab-port{
+        width: 100%;
+        padding: 1rem;
+        padding-top: 8rem;
+    }
+
+  }
+  

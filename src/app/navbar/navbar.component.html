@@ -35,7 +35,7 @@
       <button
         class="navbar__button"
         [ngClass]="{ 'navbar__button--focus': showLogin }"
-        (click)="clickAccedi()"
+        [routerLink]="'/login'"
         *ngIf="isLoggedOut$ | async"
       >
         Login

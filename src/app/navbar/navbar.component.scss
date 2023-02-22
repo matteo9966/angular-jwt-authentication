@@ -1,26 +1,35 @@
 @use '../styles/colors' as c;
 @use '../styles/variables' as v;
+@use 'sass:color';
 :host{
     position: relative;
     width: 100vw;
+    height: v.$navbar-height;
+    position: fixed;
+    z-index: 1;
+    top: 0;
 }
 .navbar{
+    background-color:transparentize($color:c.$color-secondary, $amount: 0) ;
+    color:c.$color-secondary-alt;
+    height: inherit;
     &__buttons{
+        height: inherit;
+        padding-inline: 2rem;
         // background-color: white;
         list-style: none;
         display: flex;
         justify-content: flex-end;
-        border-bottom: 1px solid c.$navbar-border--light;
         // color: c.$navbar-background-alt--light;
         // background-color: c.$navbar-background--light;
     }
     &__button{
+        height: 100%;
         background-color: transparent;
         border: none;
         padding: 1rem;
         font-size: v.$navbar-font-size;
         text-transform: uppercase;
-        border-right: 1px solid c.$navbar-border--light;
       
     }
 

@@ -1,0 +1,36 @@
+.button{
+    position: relative;
+    padding: 1rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    background-image: linear-gradient(to right bottom, #589ce9, #152c94);
+    color:white;
+    transition: all 0.2s;
+    &:hover{
+     transform: translateY(-2px);
+     box-shadow: 0 1rem 2rem rgb(0 0 0 / 20%);
+      
+
+    
+    }
+
+    &::after{
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        background-image: linear-gradient(to right bottom, #588be9, #151794);
+        border-radius: 10px;
+        top:0;
+        left:0;
+        z-index: -1;
+    }
+    
+    &:hover::after{
+        transition: all .4s;
+        transform: scale(2);
+        opacity: 0;
+    }
+}

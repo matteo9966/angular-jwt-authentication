@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { SignupComponent } from './signup/signup.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
@@ -15,13 +17,15 @@ const routes: Routes = [
   },
   {
     path: 'signup',
-    component: SignupComponent,
+    component: SignupPageComponent,
   },
   {
     path: 'admin',
     loadChildren: () =>
       import('./admin-home/admin.module').then((m) => m.AdminModule),
   },
+  {path:'login', component:LoginPageComponent
+},
 
   {
     path: 'user',
