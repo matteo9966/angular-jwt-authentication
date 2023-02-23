@@ -21,6 +21,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SharedComponentModule } from './components/shared/SharedComponents.module';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     LoginModule,
     SignupModule,
     HttpClientModule,
+    ReactiveFormsModule, //creo un modulo per ciascuna pagina?
     HttpClientXsrfModule.withOptions({
       //TODO non aggiunge questo header per qualche motivo :(
         cookieName: 'XSRF-TOKEN',

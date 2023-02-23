@@ -1,4 +1,9 @@
 <div class="input-container">
-  <input [type]="type" [placeholder]="placeholder" [id]="id" [value]="value"/>
+  <input
+    [type]="type"
+    [placeholder]="placeholder"
+    [id]="id"
+    [(ngModel)]="value"
+  />
   <label [for]="id">{{ label }}</label>
 </div>

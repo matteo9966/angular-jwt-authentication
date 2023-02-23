@@ -4,7 +4,7 @@ import { ButtonComponent } from './button/button.component';
 import { ImputComponentsModule } from './inputComponents/InputComponents.module';
 
 @NgModule({
-  imports: [CommonModule, ImputComponentsModule],
+  imports: [CommonModule, ImputComponentsModule,],
   declarations: [ButtonComponent],
   exports: [ButtonComponent,ImputComponentsModule],
 })

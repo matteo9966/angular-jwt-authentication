@@ -8,11 +8,10 @@ import { UserRoles } from "../../constants/userRoles";
 // }
 
 export interface IUserSignup { 
-    username:string;
+    username?:string;
     password:string;
     email:string;
-    roles:Array<keyof typeof UserRoles>
-    //altre cose le aggiungo col tempo
+    roles?:Array<keyof typeof UserRoles>
 }
 
 // export type IUser = Omit<IUserSignup,"password">

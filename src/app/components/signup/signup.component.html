@@ -1,17 +1,17 @@
-<div class="signup-container">
-  <form action="" class="signup-form">
+<div class="signup-container" >
+  <form action="" class="signup-form" [formGroup]="signupForm" (ngSubmit)="signup($event)">
     <div class="signup-form__title">
       <h2>Signup Form</h2>
     </div>
     <div class="signup-form__input-container">
-      <app-input placeholder="Email" label="email" id="email"></app-input>
+      <app-input placeholder="Email" label="email" id="email" formControlName="email"></app-input>
     </div>
     <div class="signup-form__input-container">
-      <app-input placeholder="Password" label="password" id="password"></app-input>
+      <app-input placeholder="Password" label="password" id="password" formControlName="password"></app-input>
     </div>
     <div class="signup-form__input-container">
-      <app-input placeholder="Confirm Password" label="confirm password" id="confirm-password"></app-input>
+      <app-input placeholder="Confirm Password" label="confirm password" id="confirm-password" formControlName="confirmPassword"></app-input>
     </div>
-    <app-button text="Signup"></app-button>
+  <button type="submit">Submit</button>
   </form>
 </div>
