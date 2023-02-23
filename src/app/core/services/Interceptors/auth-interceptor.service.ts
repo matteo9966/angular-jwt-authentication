@@ -27,8 +27,9 @@ export class AuthInterceptorService implements HttpInterceptor {
       catchError((err) => {
         if (err.status === 401) {
           return this.handleRefreshToken(req, next);
-        }
-        return EMPTY;
+        }else 
+        throw new Error(err);
+        // return EMPTY;
       })
     );
   }

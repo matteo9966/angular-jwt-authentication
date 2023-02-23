@@ -1,37 +1,73 @@
-@use '../../../../styles/mixins' as m;
-.input-container{
-    input{
-        display: block;
-        padding:0.5rem;
-        font-size: 2rem;
-        border: none;
-        border-bottom: 3px solid transparent;
-        transition: all 0.3s;
-        width:40ch;
+@use "../../../../styles/mixins" as m;
 
-        @include m.respond-tab-port{
-            width: 80%;
-        }
+:host {
+  .input-container {
+    input {
+      display: block;
+      padding: 0.5rem;
+      font-size: 2rem;
+      border: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+      width: 40ch;
 
-    &:focus{
+      @include m.respond-tab-port {
+        width: 80%;
+      }
+
+      &:focus {
         border-bottom: 3px solid rgba(255, 68, 0, 0.397);
-    }
-    
-    }
-  
-    &:not(:last-child){
-        margin-bottom: 3rem;
-    }
-    label{
-        transform: translateY(0);
-        transition: all 0.4s;
-        opacity:1;
+      }
     }
 
-    input:placeholder-shown + label{
-        visibility: hidden;
-        opacity: 0;
-        transform: translateY(-3rem);
+    &:not(:last-child) {
+      margin-bottom: 3rem;
     }
+    label {
+      transform: translateY(0);
+      transition: all 0.5s;
+      opacity: 1;
+      display: block;
+    }
+
+    input:placeholder-shown + label {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-3rem);
+    }
+  }
+
+  &.ng-invalid.ng-touched,&.crossfieldError.ng-touched {
+    .input-container {
+      input:not(:focus) {
+        border-bottom: 3px solid red;
+      }
+    }
+  }
+
+  &.ng-valid.ng-touched:not(.crossfieldError){
+    .input-container{
+        input{
+            border-bottom:3px solid green;
+        }
+    }
+  }
+  &.ng-pending.ng-touched{
+    .input-container{
+        input{
+            border-bottom:3px solid rgb(199, 90, 1);
+        }
+    }
+  }
+
+
+//   &.crossfieldError.ng-touched{
+//     .input-container{
+//         input{
+
+//         }
+//     }
+//   }
+
 
 }

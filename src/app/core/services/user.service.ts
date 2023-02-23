@@ -31,8 +31,7 @@ export class UserService {
         // shareReplay(), TODO: come si usa sto share replay??
         map((response) => {
           return response.exists;
-        }),
-        catchError((error) => of(false))
+        })
       );
   }
 
