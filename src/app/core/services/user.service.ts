@@ -28,7 +28,6 @@ export class UserService {
             console.log('error while trying to verify if email exists');
           },
         }),
-        // shareReplay(), TODO: come si usa sto share replay??
         map((response) => {
           return response.exists;
         })

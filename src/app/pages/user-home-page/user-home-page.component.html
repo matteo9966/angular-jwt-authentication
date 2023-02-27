@@ -1,0 +1,26 @@
+<!-- <div class="user-home-head-container">
+</div> -->
+<div class="user-home__body">
+  <div class="user-home__head">
+    <h2 class="user-home__title">Welcome back</h2>
+    <h3 class="user-home__subtitle">{{email$|async}}</h3>
+  </div>
+  
+    <ul class="user-home__info">
+      <li class="data">
+        <span class="data__title">Email</span>
+        <span>{{email$|async}}</span>
+      </li>
+      <li class="data">
+        <span class="data__title">Usermame</span>
+        <span>{{username$|async}}</span>
+      </li>
+      <li class="data">
+        <span class="data__title">Roles</span>
+        <span>{{roles$|async|json}}</span>
+      </li>
+    </ul>
+</div>
+<div class="user-home__cards">
+    
+</div>

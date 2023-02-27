@@ -1,0 +1,177 @@
+@use "./../../styles/variables" as v;
+@use './../../styles/mixins' as m;
+@use './../../styles/shared/animations' as a;
+
+$slide-down-delay:0.5;
+$slide-down-duration:2 + $slide-down-delay;
+$text-1-delay:$slide-down-duration +0.5;
+$text-2-delay:$text-1-delay +0.2;
+$text-3-delay:$text-2-delay +0.2;
+
+@keyframes fade-slide-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-4rem);
+            transform: translateY(-4rem);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.user-home {
+  &-head-container {
+    width: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+    background: v.$user-bg;
+    height: 20rem;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    &::before {
+      z-index: 1;
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      background-color: aliceblue;
+      display: block;
+      top: 0;
+    }
+  }
+
+  &__head {
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    @include a.title-animation(3s);
+    h2 {
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      font-size: 5rem;
+      font-weight: bold;
+      letter-spacing: 0.15rem;
+      background: linear-gradient(rgb(25, 25, 65), rgb(6, 51, 82));
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-size: 5rem;
+    font-weight: bold;
+    letter-spacing: 0.15rem;
+    background: linear-gradient(rgb(25, 25, 65), rgb(6, 51, 82));
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__subtitle {
+    color: white;
+
+  }
+
+  &__body{
+    padding: 7rem;
+    height: 100rem;
+    position: relative;
+    overflow-y: hidden;
+    &::before{
+       opacity:0;
+       animation: fade-slide-down;
+       animation-timing-function:cubic-bezier(0, 0.5, 0, 1);
+       animation-duration: $slide-down-duration * 1s;
+       animation-fill-mode: forwards;
+       animation-delay: $slide-down-delay * 1s;
+       content:"";
+       position: absolute;
+       top:0;
+       left: 0;
+       right: 0;
+       bottom: 0;    
+      display: flex;
+      background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.8)),v.$user-body;
+      background-size: cover;
+      z-index: 1;
+    }
+  }
+
+  &__info{
+    flex:1;
+    display: block;
+    z-index: 2;
+    position: relative;
+
+    @for $i from 1 to 4 {
+      $duration:0.5;
+      $delay:($i * 0.3 + $slide-down-duration + ($i - 1) * $duration ) * 1s;
+
+      &>li:nth-child(#{$i}){
+         opacity: 0;
+         @include a.text-slide-in($delay,$duration * 1s);
+      }
+    }
+}
+
+  &__pictures{
+    flex: 1;
+    position: relative;
+  }
+
+  &__picture{
+    @include m.imgAspectRatio(35rem,35rem);
+    position: absolute;
+    z-index: inherit;
+    outline: 5px solid transparent;
+    outline-offset: 0rem;
+    &:hover{
+        transition: all 0.2s;
+        z-index: 10;
+  
+        border-spacing: 0.4rem;
+        outline: 5px solid green;
+        outline-offset: 2rem;
+        transform: scale(1.1);
+    }
+
+
+  }
+
+ 
+
+}
+
+.pic1{
+    left:-5rem;
+}
+
+.pic2{
+    left: 26rem;
+    top: 31rem;
+}
+
+.pic3{
+    left: 10rem;
+    top: 10rem;
+}
+
+.data{
+    margin: 2rem;
+
+    &>*{
+        display: block;
+    }
+
+    &__title{
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+
+  }

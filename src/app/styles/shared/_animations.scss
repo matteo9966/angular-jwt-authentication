@@ -1,0 +1,71 @@
+@keyframes fade-slide-down {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(-4rem);
+              transform: translateY(-4rem);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: none;
+              transform: none;
+    }
+  }
+
+  @keyframes text-slide-in{
+     0%{
+        opacity: 0;
+        transform: translateY(-4rem);
+     }
+     100%{
+        opacity: 1;
+        transform: none;
+     }
+  }
+
+  @keyframes title-animation {
+	0% {
+		animation-timing-function: ease-out;
+		transform: scale(1);
+		transform-origin: center center;
+	}
+
+	10% {
+		animation-timing-function: ease-in;
+		transform: scale(0.91);
+	}
+
+	17% {
+		animation-timing-function: ease-out;
+		transform: scale(0.98);
+	}
+
+	33% {
+		animation-timing-function: ease-in;
+		transform: scale(0.87);
+	}
+
+	45% {
+		animation-timing-function: ease-out;
+		transform: scale(1);
+	}
+}
+
+
+  @mixin text-slide-in($delay:1s,$duration:1s){
+    animation: text-slide-in;
+    animation-duration: $duration;
+    animation-delay: $delay;
+    animation-fill-mode: forwards;
+  }
+
+  @mixin title-animation($delay:1s,$duration:1s){
+    animation: title-animation;
+    animation-duration:$duration;
+    animation-direction:normal;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-delay: $delay;
+    animation-timing-function: cubic-bezier(0,.71,1,.31);
+    
+
+  }

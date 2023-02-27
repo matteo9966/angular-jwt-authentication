@@ -29,6 +29,6 @@
         formControlName="confirmPassword"
       ></app-input>
     </div>
-    <app-button text="Signup" (click)="signup($event)"></app-button>
+    <app-button text="Signup" (click)="signup($event)" [disabled]="disabledSubmit"></app-button>
   </form>
 </div>

@@ -12,6 +12,15 @@
 }
 
 
+@mixin imgAspectRatio($max-width:230px,$max-height:230px){
+  display: block;
+  max-width:$max-width;
+  max-height:$max-height;
+  width: auto;
+  height: auto;
+}
+
+
 $breakpoints: (
   phone: phone,
   tab-port: tab-port,

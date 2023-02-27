@@ -119,4 +119,14 @@ export class AuthenticationService {
       })
     );
   }
+
+  get username$(){
+    return this.user$.pipe(map(user=>user?.username?user.username:"no_username"))
+  } 
+  get email$(){
+    return this.user$.pipe(map(user=>user?.email?user.email:"no_email"))
+  }
+  get roles$(){
+    return this.user$.pipe(map(user=>user?.roles?user.roles:[]))
+  }
 }

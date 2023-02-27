@@ -1,8 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { map, Observable, tap } from 'rxjs';
 import { IUserSignup } from 'src/app/core/models/user/user';
 import { UserService } from 'src/app/core/services/user.service';
+import { mapPasswordConfirmError } from 'src/app/core/utils/mapPasswordConfirm';
 import { confirmPasswordValidator } from 'src/app/core/validators/confirm-password.validator';
 import { emailExistsAsyncValidator } from 'src/app/core/validators/email-exists.asyncValidator';
 
@@ -19,33 +25,14 @@ export class SignupComponent implements OnInit {
   constructor(private fb: FormBuilder, private userService: UserService) {
     this.signupForm = this.createForm();
 
-
     this.showInvalidConfirmError$ = this.signupForm.valueChanges.pipe(
-      map((value: Partial<IUserSignup & { confirmPassword: string }>) => {
-        const passwordControl = this.passwordControl;
-        const confirmPasswordControl = this.confirmPasswordControl;
-
-        if (!passwordControl?.touched || !confirmPasswordControl?.touched) {
-          return false;
-        }
-        if (
-          (<string>passwordControl?.value || '').length === 0 ||
-          (<string>confirmPasswordControl?.value || '').length === 0
-        ) {
-          return false;
-        }
-        //length is greater than1
-        if (
-          <string>passwordControl?.value !==
-          <string>confirmPasswordControl?.value
-        ) {
-          return true;
-        }
-        return false;
-      }),
-     
-    )
-
+      map(
+        mapPasswordConfirmError(
+          this.passwordControl,
+          this.confirmPasswordControl
+        )
+      )
+    );
   }
 
   ngOnInit(): void {}
@@ -86,12 +73,21 @@ export class SignupComponent implements OnInit {
   }
 
   get emailControl() {
-    return this.signupForm.get('email');
+    return this.signupForm.get('email') as FormControl;
   }
   get passwordControl() {
-    return this.signupForm.get('password');
+    return this.signupForm.get('password') as FormControl;
   }
   get confirmPasswordControl() {
-    return this.signupForm.get('confirmPassword');
+    return this.signupForm.get('confirmPassword') as FormControl;
+  }
+
+  get disabledSubmit() {
+    return !(
+      this.emailControl.valid &&
+      this.confirmPasswordControl.valid &&
+      this.passwordControl.valid &&
+      this.signupForm.valid
+    );
   }
 }

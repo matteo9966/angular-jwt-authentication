@@ -10,6 +10,7 @@ export class ButtonComponent implements OnInit {
   constructor() { }
 
   @Input() text:string="";
+  @Input() disabled:boolean=false;
   ngOnInit(): void {
   }
 

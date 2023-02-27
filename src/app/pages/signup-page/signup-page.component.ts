@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IUserSignup } from 'src/app/core/models/user/user';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { emailExistsAsyncValidator } from 'src/app/core/validators/email-exists.asyncValidator';
 
 @Component({
@@ -11,10 +13,14 @@ import { emailExistsAsyncValidator } from 'src/app/core/validators/email-exists.
 export class SignupPageComponent implements OnInit {
   ngOnInit(): void {
   }
-
+  constructor(private authenticationService:AuthenticationService,private router:Router){}
   //i dati da mandare al backend
   submitFormData(data:IUserSignup){
-    console.log(data);
+    
+    this.authenticationService.signup(data).subscribe((user)=>{
+      console.log('signup completed:',user);
+      this.router.navigateByUrl('/home')
+    });
   }
 
 }

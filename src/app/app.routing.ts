@@ -24,12 +24,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./admin-home/admin.module').then((m) => m.AdminModule),
   },
-  {path:'login', component:LoginPageComponent
-},
+  { path: 'login', component: LoginPageComponent },
 
   {
     path: 'user',
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+  },
+  
+  {
+    //TODO aggiungere un unauthorizedGuard!
+    path: 'user-home',
+    loadChildren: () =>
+      import('./pages/user-home-page/user-home-page.module').then(
+        (m) => m.UserHomePageModule
+      ),
   },
 
   { path: 'unauthorized', component: UnauthorizedComponent },

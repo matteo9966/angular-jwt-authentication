@@ -1,5 +1,16 @@
 import { AbstractControl, AsyncValidatorFn } from '@angular/forms';
-import { catchError, map, NEVER, of, timeout } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  first,
+  map,
+  NEVER,
+  of,
+  switchMap,
+  throttleTime,
+  timeout,
+} from 'rxjs';
 import { UserService } from '../services/user.service';
 
 export function emailExistsAsyncValidator(
@@ -7,8 +18,13 @@ export function emailExistsAsyncValidator(
 ): AsyncValidatorFn {
   const asyncValidator: AsyncValidatorFn = (control: AbstractControl) => {
     const email = control.value;
-    console.log('validating: ', email);
-    return userService.userEmailExists(email).pipe(
+
+    const values$ = control.valueChanges;
+
+    return values$.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      switchMap((value) => userService.userEmailExists(value)),
       map((exists) => {
         if (exists) {
           return { userExists: true };
@@ -16,11 +32,26 @@ export function emailExistsAsyncValidator(
           return null;
         }
       }),
+      first(),
       catchError((err) => {
-        console.log('the error got caught')
-        return NEVER // non completa mai e resta in pending
+        return NEVER; // non completa mai e resta in pending
       })
     );
+
+    // return userService.userEmailExists(email).pipe(
+    //   throttleTime(2500),
+    //   map((exists) => {
+    //     if (exists) {
+    //       return { userExists: true };
+    //     } else {
+    //       return null;
+    //     }
+    //   }),
+    //   catchError((err) => {
+       
+    //     return NEVER; // non completa mai e resta in pending
+    //   })
+    // );
   };
 
   return asyncValidator;
