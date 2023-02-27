@@ -1,31 +1,34 @@
-@use 'sass:map';
+@use "sass:map";
 @mixin app-font {
-    font-family: "Comfortaa", cursive;
-    font-family: "Lato", sans-serif;
-  }
-
-  @mixin absCenter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  font-family: "Comfortaa", cursive;
+  font-family: "Lato", sans-serif;
 }
 
+@mixin hand-writing {
+  font-family: "Fasthand", cursive;
+  font-family: "Shantell Sans", cursive;
+}
 
-@mixin imgAspectRatio($max-width:230px,$max-height:230px){
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin imgAspectRatio($max-width: 230px, $max-height: 230px) {
   display: block;
-  max-width:$max-width;
-  max-height:$max-height;
+  max-width: $max-width;
+  max-height: $max-height;
   width: auto;
   height: auto;
 }
-
 
 $breakpoints: (
   phone: phone,
   tab-port: tab-port,
   tab-land: tab-land,
-  desktop:desktop,
+  desktop: desktop,
   big-desktop: big-desktop,
 );
 
@@ -57,20 +60,19 @@ $breakpoints: (
   }
 }
 
-@mixin respond-desktop{
-    @include respond(map.get($breakpoints,"desktop")){
-        @content;
-    }
+@mixin respond-desktop {
+  @include respond(map.get($breakpoints, "desktop")) {
+    @content;
+  }
 }
-@mixin respond-tab-port{
-    @include respond(map.get($breakpoints,"tab-port")){
-        @content;
-    }
+@mixin respond-tab-port {
+  @include respond(map.get($breakpoints, "tab-port")) {
+    @content;
+  }
 }
 
-
-@mixin respond-phone{
-    @include respond(map.get($breakpoints,"phone")){
-        @content;
-    }
+@mixin respond-phone {
+  @include respond(map.get($breakpoints, "phone")) {
+    @content;
+  }
 }

@@ -19,7 +19,7 @@ export class SignupPageComponent implements OnInit {
     
     this.authenticationService.signup(data).subscribe((user)=>{
       console.log('signup completed:',user);
-      this.router.navigateByUrl('/home')
+      this.router.navigateByUrl('/user-home')
     });
   }
 

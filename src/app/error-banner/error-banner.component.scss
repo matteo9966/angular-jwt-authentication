@@ -1,14 +1,26 @@
 :host{
-    position: absolute;
-    bottom:8rem;
+    position: fixed;
+    top:80%;
     right:8rem;
+    z-index: 100;
    
     
 }
 
 .banner-container{
     padding:2rem;
-    background-color: rgba(255, 77, 77, 0.253);
+    background-color: rgb(255, 77, 77);
     color:rgb(75, 0, 0);
     border-radius: 10px;
+    animation: blurout 2s ease-in forwards;
+}
+
+
+@keyframes blurout{
+  0%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+  }
 }

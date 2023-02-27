@@ -1,0 +1,50 @@
+.card{
+    position: relative;
+    perspective: 250rem;
+    width:40rem;
+    height:66rem;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+
+    border-radius: 5px;
+    
+    &__face{
+        border-radius: 5px;
+        position:absolute;
+        top:0;
+        left: 0;
+        bottom:0;
+        right: 0;
+        backface-visibility: hidden;
+        overflow: hidden;
+        transition: all 1s ease;
+    }
+
+   
+ 
+    &--front{
+        background-color:red;
+        display: flex;
+        transform: rotateY(0);
+        transform-origin: 0 100%;
+      
+        
+    }
+    
+    &--back{
+        background-color: rgb(255, 255, 231);
+        // transform: rotateY(180deg);
+        // transform-origin: left center;
+    }
+    
+    &:hover>.card--front{
+        transform: rotateY(-85deg);
+        transform-origin: left 0; 
+    }
+    &:hover>.card--back{
+        // transform: rotateY(0deg);
+    }
+
+
+}
+

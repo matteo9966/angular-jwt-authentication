@@ -68,6 +68,8 @@ const authorizationGuardFactoryAdmin = (
       cookieName: 'XSRF-TOKEN',
       headerName: 'x-XSRF-TOKEN',
     }),
+    SharedComponentModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

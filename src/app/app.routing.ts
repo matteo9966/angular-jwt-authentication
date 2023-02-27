@@ -45,9 +45,9 @@ const routes: Routes = [
 
   { path: 'unauthorized', component: UnauthorizedComponent },
 
-  { path: '', redirectTo: 'signup', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-  { path: '**', redirectTo: 'signup' }, // crea un notfound
+  { path: '**', redirectTo: '/home' }, // crea un notfound
 ];
 
 @NgModule({

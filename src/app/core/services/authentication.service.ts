@@ -14,6 +14,7 @@ import { IUser, IUserSignup } from '../models/user/user';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/login/login.request';
 import { LoginResponse } from '../models/login/login.response';
+import { Router } from '@angular/router';
 
 const anonimous_USER: IUser = {
   email: '',
@@ -39,7 +40,7 @@ export class AuthenticationService {
   public isLoggedIn$ = this.user$.pipe(map((user) => Boolean(user?.id)));
   public isLoggedOut$ = this.isLoggedIn$.pipe(map((loggedIn) => !loggedIn));
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router:Router) {
     this.getUserSession().subscribe((user) => this.subject.next(user));
   }
 
@@ -70,7 +71,8 @@ export class AuthenticationService {
       .pipe(
         shareReplay(),
         tap(() => {
-          this.subject.next(anonimous_USER); // emetto un utente nullo
+          this.subject.next(anonimous_USER); // emetto un utente null
+          this.router.navigateByUrl('/home')
         })
       );
   }

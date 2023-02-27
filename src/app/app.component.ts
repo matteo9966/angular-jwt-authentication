@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { ViewService } from './core/services/view.service';
@@ -17,7 +18,7 @@ export class AppComponent {
       }
   })
 
-  router.navigateByUrl('/user-home')
+  // router.navigateByUrl('/user-home')
 }
 
 hideLogin(){
