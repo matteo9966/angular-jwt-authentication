@@ -23,6 +23,25 @@ import { SharedComponentModule } from './components/shared/SharedComponents.modu
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AuthenticationService } from './core/services/authentication.service';
+import { Router } from '@angular/router';
+import { AuthorizationGuard } from './core/guards/authorization.guard';
+import { ErrorBannerComponent } from './error-banner/error-banner.component';
+import { ShowErrorDirective } from './core/directives/show-error.directive';
+import { GlobalInterceptorService } from './core/services/Interceptors/global-interceptor.service';
+
+const authorizationGuardFactoryUser = (
+  authService: AuthenticationService,
+  router: Router
+) => {
+  return new AuthorizationGuard(['USER'], authService, router);
+};
+const authorizationGuardFactoryAdmin = (
+  authService: AuthenticationService,
+  router: Router
+) => {
+  return new AuthorizationGuard(['ADMIN'], authService, router);
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +53,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginPageComponent,
     FooterComponent,
     SignupComponent,
-    SignupPageComponent
+    SignupPageComponent,
+    ErrorBannerComponent,
+    ShowErrorDirective,
   ],
   imports: [
     BrowserModule,
@@ -42,19 +63,32 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginModule,
     SignupModule,
     HttpClientModule,
-    ReactiveFormsModule, //creo un modulo per ciascuna pagina?
     HttpClientXsrfModule.withOptions({
       //TODO non aggiunge questo header per qualche motivo :(
-        cookieName: 'XSRF-TOKEN',
-        headerName: 'x-XSRF-TOKEN',
-      }),
-      SharedComponentModule,
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'x-XSRF-TOKEN',
+    }),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: AuthInterceptorService,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: GlobalInterceptorService,
+    },
+    {
+      provide: 'userAuthorizationGuard',
+      useFactory: authorizationGuardFactoryUser,
+      deps: [AuthenticationService, Router],
+    },
+    {
+      provide: 'adminAuthorizationGuard',
+      useFactory: authorizationGuardFactoryAdmin,
+      deps: [AuthenticationService, Router],
     },
   ],
   bootstrap: [AppComponent],

@@ -1,4 +1,5 @@
 <div class="container">
+  <!-- qui ci metto error banner che ha un position absolute e che compare e scompare in base allo stato -->
   <app-navbar></app-navbar>
   <div (click)="hideLogin()" class="router-container">
     <router-outlet></router-outlet>
@@ -6,3 +7,5 @@
   <app-footer></app-footer>
 
 </div>
+
+<app-error-banner *appShowError></app-error-banner>

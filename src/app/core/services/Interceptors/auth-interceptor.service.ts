@@ -25,7 +25,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
     return next.handle(reqClone).pipe(
       catchError((err) => {
-        if (err.status === 401) {
+        if (err.status === 401 && !req.url.includes('login')) {
           return this.handleRefreshToken(req, next);
         }else 
         throw new Error(err);

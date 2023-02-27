@@ -6,6 +6,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { SignupComponent } from './signup/signup.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
+
 const routes: Routes = [
   {
     path: 'home',
@@ -21,6 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canLoad:['adminAuthorizationGuard'],
     loadChildren: () =>
       import('./admin-home/admin.module').then((m) => m.AdminModule),
   },
@@ -28,6 +30,7 @@ const routes: Routes = [
 
   {
     path: 'user',
+    canLoad: ['userAuthorizationGuard'], //uso un injection token che definisco in app.module
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
   
