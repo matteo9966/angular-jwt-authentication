@@ -18,3 +18,6 @@ this will initialize a https development server with self signed certificates,
 - together with the server you must run the nodejs authentication server  [Authentication server without Express](https://github.com/matteo9966/Authentication-Server-without-express)
 ---
 check the server repository for additional info
+
+
+I'm currently working on the branch 'styling' this branch contains a bunch of new components that will eventually replace the dummy ones i've used in the main branch
