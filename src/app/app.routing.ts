@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authenticationGuard } from './core/guards/guards-v15/authentication-guard';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 const routes: Routes = [
   {
+    // canActivate:[()=>authenticationGuard()], //TODO_ solo per versione 15
     path: 'home',
     component: HomeComponent,
   },
