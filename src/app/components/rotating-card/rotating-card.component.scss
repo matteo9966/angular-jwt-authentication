@@ -1,50 +1,78 @@
-.card{
-    position: relative;
-    perspective: 250rem;
-    width:40rem;
-    height:66rem;
-    border-radius: 10px;
-    transform-style: preserve-3d;
+@use "../../styles/mixins" as m;
+.card {
+  position: relative;
+  perspective: 250rem;
+  width: 40rem;
+  height: 66rem;
+  border-radius: 10px;
+  transform-style: preserve-3d;
 
+  border-radius: 5px;
+
+  &__face {
     border-radius: 5px;
-    
-    &__face{
-        border-radius: 5px;
-        position:absolute;
-        top:0;
-        left: 0;
-        bottom:0;
-        right: 0;
-        backface-visibility: hidden;
-        overflow: hidden;
-        transition: all 1s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    backface-visibility: hidden;
+    overflow: hidden;
+    transition: all 1s ease;
+    @include m.respond-tab-port {
+      position: relative;
+      top: unset;
+      left: unset;
+      bottom: unset;
+      right: unset;
     }
 
-   
- 
-    &--front{
-        background-color:red;
-        display: flex;
-        transform: rotateY(0);
-        transform-origin: 0 100%;
-      
-        
+    &:first-child {
+      border-radius: 0 0 5px 5px;
     }
-    
-    &--back{
-        background-color: rgb(255, 255, 231);
-        // transform: rotateY(180deg);
-        // transform-origin: left center;
+    &:last-child {
+      border-radius: 5px 5px 0 0;
     }
-    
-    &:hover>.card--front{
-        transform: rotateY(-85deg);
-        transform-origin: left 0; 
-    }
-    &:hover>.card--back{
-        // transform: rotateY(0deg);
-    }
+  }
 
+  &--front {
+    background-color: red;
+    display: flex;
+    transform: rotateY(0);
+    transform-origin: 0 100%;
 
+    @include m.respond-tab-port {
+      grid-row: 1 / span 1;
+    }
+  }
+
+  &--back {
+    background-color: rgb(255, 255, 231);
+    // transform: rotateY(180deg);
+    // transform-origin: left center;
+    @include m.respond-tab-port {
+      grid-row: 2 / span 1;
+    }
+  }
+
+  &:hover > .card--front {
+    transform: rotateY(-85deg);
+    transform-origin: left 0;
+
+    @include m.respond-tab-port {
+      transform: none;
+    }
+  }
+  // &:hover>.card--back{
+  //     // transform: rotateY(0deg);
+  // }
+
+  @include m.respond-tab-port {
+    width: 90%;
+    transform-style: unset;
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    grid-template-columns: 1fr;
+    height: auto;
+  }
 }
-

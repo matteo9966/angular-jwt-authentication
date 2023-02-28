@@ -14,7 +14,7 @@
     >
       {{ (isLoggedIn$ | async) ? "LOGGED IN" : "NOT LOGGED IN" }}
     </li>
-    <li>
+    <!-- <li>
       <button
         class="navbar__button"
         *ngIf="isLoggedIn$ | async"
@@ -22,13 +22,13 @@
       >
         Pantry
       </button>
-    </li>
+    </li> -->
 
     <li *appRbacAllow="['ADMIN']">
       <button class="navbar__button">ADMIN</button>
     </li>
     <li *appRbacAllow="['ADMIN', 'USER']">
-      <button class="navbar__button">USER</button>
+      <button class="navbar__button" routerLink="/user-home">USER</button>
     </li>
     <li *appRbacAllow="['ADMIN']">
       <button class="navbar__button" [routerLink]="'/admin/users'">

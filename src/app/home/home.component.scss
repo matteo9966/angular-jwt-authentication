@@ -31,6 +31,12 @@
     gap:15rem;
     justify-content: center;
     align-items: center;
+
+    @include m.respond-tab-port{
+        flex-direction: column;
+        gap: 5rem;
+
+     }
 }
 
 .card-cover{
@@ -53,6 +59,11 @@
         background-image: v.$book-2;
     }
 
+    @include m.respond-tab-port{
+       padding:1rem;
+        
+     }
+
 }
 
 .card-cover-description{
@@ -63,6 +74,14 @@
     border-radius: 1rem;
     text-align: center;
     padding: 3rem;
+
+    @include m.respond-tab-port{
+       padding:1rem;
+       background-color: transparent;
+       color:white;
+       font-weight: bold;
+       padding: 2rem;
+    }
 }
 
 .card-content{
@@ -71,4 +90,9 @@
     display: flex;
     flex-direction: column;
     gap:2rem;
+
+    @include m.respond-tab-port{
+        padding:2rem;
+        gap:1.5rem;
+     }
 }
