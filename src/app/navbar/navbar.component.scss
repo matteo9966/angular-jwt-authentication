@@ -13,6 +13,8 @@
     background-color:transparentize($color:c.$color-secondary, $amount: 0) ;
     color:c.$color-secondary-alt;
     height: inherit;
+    display: flex;
+    justify-content: space-between;
     &__buttons{
         height: inherit;
         padding-inline: 2rem;
@@ -56,4 +58,18 @@
         color:rgb(0, 255, 0);
         background-color: rgba(0, 255, 85, 0.048);
     }
+}
+
+.nav-logo{
+    height: 2.25rem;
+    width: 4.25rem;
+    fill: black;
+    display: block;
+    position: relative;
+    z-index: inherit;
+    margin: auto;
+}
+
+.logo-container{
+    display: flex;
 }
